@@ -70,3 +70,9 @@ Crear un archivo con las dependencias del proyecto
 ```sh
 pip3 freeze > requirements.txt
 ```
+
+Instalar las dependencias de un proyecto
+
+```sh
+pip install -r requirements.txt
+```

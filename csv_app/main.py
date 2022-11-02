@@ -23,7 +23,7 @@ def run():
     # if len(result) > 0:
     #     labels, values = utils.get_population(result[0])
     #     charts.generate_bar_chart(labels, values, country)
-
+    print(countries)
     charts.generate_pie_chart(countries, percentages)
 
 
