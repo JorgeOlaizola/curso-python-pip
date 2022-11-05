@@ -1,8 +1,7 @@
+name = 'Nati'
+last_name = 'Lavallena'
 
-
-print('Hello world')
-print('Hola')
-
+saludo = f'Hola, cómo estás {name} {last_name}'
 
 
 
