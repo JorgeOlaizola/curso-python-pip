@@ -71,3 +71,10 @@ Correr proyecto en django
 cd prometeocoleccionablesapp
 py manage.py runserver
 ```
+
+Consola interactiva
+
+```sh
+cd prometeocoleccionablesapp
+py manage.py shell
+```
