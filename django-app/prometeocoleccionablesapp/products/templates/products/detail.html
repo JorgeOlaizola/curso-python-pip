@@ -7,10 +7,27 @@
     <title>Product detail</title>
   </head>
   <body>
+    <a href="{% url 'products:index' %}">⬅ Volver</a>
     <h1>Detalle de producto</h1>
     {% if product %}
-    <h1>{{ product.name }}</h1>
-    <p>{{ product.description }}</p>
+    <form action="{% url 'products:add_stock' product.id  %}" method="post">
+      {% csrf_token %}
+      <!-- Se agrega para evitar ataques -->
+      <legend><h1>{{ product.name}}</h1></legend>
+      <p>{{ product.description }}</p>
+      <p>
+        Categoría:
+        <a href="{% url 'products:category_detail' product.category.id %}"
+          >{{ product.category }}</a
+        >
+      </p>
+      {% if error_message %}
+      <p><strong>{{ error_message }}</strong></p>
+      {% endif %}
+      <button name="stock" value="remove">-</button>
+      {{ product.stock }}
+      <button name="stock" value="add">+</button>
+    </form>
     {% else %}
     <p>Todavía no hay productos</p>
     {% endif %}

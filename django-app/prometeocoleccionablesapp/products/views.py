@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 from .models import Product, Category
 
 # Create your views here.
@@ -20,4 +21,19 @@ def detail_product(request, product_id):
 
 
 def add_stock(request, product_id):
-    return HttpResponse(f"Estás agregando stock al producto número {product_id}")
+    product = get_object_or_404(Product, pk=product_id)
+    option = request.POST["stock"]
+    try:
+        if option == 'add':
+            product.stock = product.stock + 1
+        else:
+            product.stock = product.stock - 1
+    except:
+        return render(request, "products/detail.html", {
+            "product": product,
+            "error_message": 'Hubo un error al actualizar el producto'
+        })
+    else:
+        product.save()
+        print(product.id)
+        return HttpResponseRedirect(reverse(f"products:product_detail", args=[product.id]))
