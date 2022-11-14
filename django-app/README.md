@@ -78,3 +78,10 @@ Consola interactiva
 cd prometeocoleccionablesapp
 py manage.py shell
 ```
+
+Correr test
+
+```sh
+cd prometeocoleccionablesapp
+py manage.py test {app_name}
+```
