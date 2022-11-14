@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
+from django.utils import timezone
 from .models import Product, Category
 
 # Create your views here.
@@ -12,13 +13,19 @@ class IndexView(generic.ListView):
     context_object_name = "latest_product_list"
 
     def get_queryset(self):
-        """Return all created products"""
-        return Product.objects.all()
+        """Return the last 5 created products"""
+        return Product.objects.filter(created_at__lte=timezone.now()).order_by("created_at")[:5]
+        # return Product.objects.all()
 
 
 class DetailView(generic.DetailView):
     model = Product
     template_name = "products/detail.html"
+
+    def get_queryset(self):
+        """Exclude any products that aren´t created yet"""
+        return Product.objects.filter(created_at__lte=timezone.now())
+
 
 # def index(request):
 #     latest_product_list = Product.objects.all()
