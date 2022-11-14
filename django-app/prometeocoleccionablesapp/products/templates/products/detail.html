@@ -8,7 +8,6 @@
   </head>
   <body>
     <a href="{% url 'products:index' %}">⬅ Volver</a>
-    <h1>Detalle de producto</h1>
     {% if product %}
     <form action="{% url 'products:add_stock' product.id  %}" method="post">
       {% csrf_token %}

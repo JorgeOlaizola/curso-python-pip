@@ -13,7 +13,7 @@ class Category(models.Model):
         return self.name
 
     def was_created_recently(self):
-        return self.created_at >= timezone.now() - datetime.timedelta(days=1)
+        return timezone.now() >= self.created_at >= timezone.now() - datetime.timedelta(days=1)
 
 
 class Product(models.Model):
